@@ -8,239 +8,243 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const App = () => {
   return (
     <>
       {/* HEADER */}
-      <header className="l-header">
-        <nav className="nav bd-grid">
-          <div>
-            <a href="#" className="nav__logo text-2xl">
-              Mahdi
-            </a>
-          </div>
-
-          <div className="nav__menu" id="nav-menu">
-            <ul className="nav__list">
-              <li className="nav__item">
-                <a href="#home" className="nav__link active-link">
-                  Home
+      <header className="sticky top-0 z-50 bg-white shadow">
+        <nav className="max-w-7xl mx-auto flex justify-between items-center p-4">
+          <a href="#" className="text-2xl font-bold text-indigo-600">
+            your logo
+          </a>
+          <ul className="hidden md:flex space-x-6 text-sm font-medium">
+            {["Home", "About", "Skills", "Work", "Contact"].map((section) => (
+              <li key={section}>
+                <a
+                  href={`#${section.toLowerCase()}`}
+                  className="hover:text-indigo-600"
+                >
+                  {section}
                 </a>
               </li>
-              <li className="nav__item">
-                <a href="#about" className="nav__link">
-                  About
-                </a>
-              </li>
-              <li className="nav__item">
-                <a href="#skills" className="nav__link">
-                  Skills
-                </a>
-              </li>
-              <li className="nav__item">
-                <a href="#work" className="nav__link">
-                  Work
-                </a>
-              </li>
-              <li className="nav__item">
-                <a href="#contact" className="nav__link">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="nav__toggle" id="nav-toggle">
-            <i className="bx bx-menu"></i>
-          </div>
+            ))}
+          </ul>
         </nav>
       </header>
 
-      <main className="l-main">
-        {/* HOME */}
-        <section className="home bd-grid" id="home">
-          <div className="home__data">
-            <h1 className="home__title">
-              Hi,
-              <br />
-              I'am <span className="home__title-color">Mahdi</span>
-              <br /> Web Designer
-            </h1>
-            <a href="#contact" className="button">
-              Contact
-            </a>
-          </div>
-
-          <div className="home__social">
-            <a href="#" className="home__social-icon">
+      {/* HOME */}
+      <section
+        id="home"
+        className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 gap-16"
+      >
+        <motion.div
+          className="text-center md:text-left"
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            Hi, I'm <span className="text-indigo-600">Mahdi</span> <br /> Web
+            Designer
+          </h1>
+          <a
+            href="#contact"
+            className="mt-6 inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition"
+          >
+            Contact Me
+          </a>
+          <div className="flex justify-center md:justify-start gap-4 mt-6 text-xl text-indigo-600">
+            <a href="#">
               <FaLinkedin />
             </a>
-            <a href="#" className="home__social-icon">
+            <a href="#">
               <FaBehance />
             </a>
-            <a href="#" className="home__social-icon">
+            <a href="#">
               <FaGithub />
             </a>
           </div>
+        </motion.div>
 
-          <div className="home__img">
-            <svg
-              className="home__blob"
-              viewBox="0 0 479 467"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <mask id="mask0" maskType="alpha">
-                <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-              </mask>
-              <g className="flex justify-left"> 
-                <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"></path>{" "}
-                <image
-                  className="home__blob-img "
-                  x="50"
-                  y="60"
-                  href="img/perfil1.png"
-                />
-              </g>
-            </svg>
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img
+            src="img/perfil1.png"
+            alt="Mahdi"
+            className="w-96 h-96 object-cover rounded-full shadow-lg border-4 border-indigo-200"
+          />
+        </motion.div>
+      </section>
+
+      {/* ABOUT */}
+      <section className="about section py-20 bg-gray-50" id="about">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <img
+              src="img/perfil2.jpg"
+              alt="About"
+              className="w-full h-[400px] object-cover rounded-xl shadow-md"
+            />
           </div>
-        </section>
-
-        {/* ABOUT */}
-        <section className="about section" id="about">
-          <h2 className="section-title">About</h2>
-          <div className="about__container bd-grid">
-            <div className="about__img ">
-              <img src="img/perfil2.jpg"  alt="about" />
-            </div>
-            <div>
-              <h2 className="about__subtitle text-2xl text-bold">I'am Mahdi</h2>
-              <p className="about__text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptate cum expedita quo culpa tempora, assumenda, quis fugiat
-                ut voluptates soluta, aut earum nemo recusandae cumque
-                perferendis! Recusandae alias accusamus atque.
-              </p>
-            </div>
+          <div>
+            <h2 className="text-4xl font-bold text-indigo-600 mb-4">
+              I'm Mahdi
+            </h2>
+            <p className="text-gray-700 leading-relaxed text-lg">
+              I'm a passionate web designer dedicated to creating modern,
+              responsive, and user-friendly websites. My focus lies in combining
+              aesthetic design with seamless functionality. With experience in
+              front-end technologies and UX/UI design principles, I strive to
+              deliver clean code and compelling digital experiences.
+            </p>
+            <p className="text-gray-600 mt-4">
+              I enjoy solving problems and turning ideas into reality through
+              code and creativity.
+            </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* SKILLS */}
-        <section className="skills section" id="skills">
-          <h2 className="section-title">Skills</h2>
-          <div className="skills__container bd-grid">
+      {/* SKILLS */}
+      <section className="skills section py-20 bg-white" id="skills">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-indigo-600 mb-12">
+            My Skills
+          </h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Skill List */}
             <div>
-              <h2 className="skills__subtitle text-2xl text-bold">
-                Profesional Skills
-              </h2>
-              <p className="skills__text">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit
-                optio id vero amet, alias architecto consectetur error eum eaque
-                sit.
+              <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+                Professional Skills
+              </h3>
+              <p className="text-gray-600 mb-8">
+                Here are some of the technologies and design tools I specialize
+                in. I’m always learning and improving!
               </p>
-
               {[
-                {
-                  name: "HTML5",
-                  icon: "bx bxl-html5",
-                  percent: "95%",
-                  barClass: "skills__html",
-                },
-                {
-                  name: "CSS3",
-                  icon: "bx bxl-css3",
-                  percent: "85%",
-                  barClass: "skills__css",
-                },
-                {
-                  name: "JAVASCRIPT",
-                  icon: "bx bxl-javascript",
-                  percent: "65%",
-                  barClass: "skills__js",
-                },
-                {
-                  name: "UX/UI",
-                  icon: "bx bxs-paint",
-                  percent: "85%",
-                  barClass: "skills__ux",
-                },
+                { name: "HTML5", percent: 95 },
+                { name: "CSS3", percent: 85 },
+                { name: "JavaScript", percent: 65 },
+                { name: "UX/UI Design", percent: 85 },
               ].map((skill) => (
-                <div className="skills__data" key={skill.name}>
-                  <div className="skills__names">
-                    <i className={`${skill.icon} skills__icon`}></i>
-                    <span className="skills__name">{skill.name}</span>
+                <div key={skill.name} className="mb-6">
+                  <div className="flex justify-between mb-1">
+                    <span className="text-sm font-medium text-indigo-600">
+                      {skill.name}
+                    </span>
+                    <span className="text-sm font-medium text-gray-600">
+                      {skill.percent}%
+                    </span>
                   </div>
-                  <div className={`skills__bar ${skill.barClass}`}></div>
-                  <div>
-                    <span className="skills__percentage">{skill.percent}</span>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div
+                      className="bg-indigo-600 h-3 rounded-full transition-all duration-700"
+                      style={{ width: `${skill.percent}%` }}
+                    ></div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div>
-              <img src="img/work3.jpg" alt="skills" className="skills__img" />
+            {/* Image or Illustration */}
+            <div className="flex justify-center">
+              <img
+                src="img/work3.jpg"
+                alt="Skills Illustration"
+                className="w-96 h-96 object-cover rounded-xl shadow-lg"
+              />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* WORK */}
-        <section className="work section" id="work">
-          <h2 className="section-title">Work</h2>
-          <div className="work__container bd-grid">
+      {/* WORK */}
+      <section className="work section py-20 bg-gray-50" id="work">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-indigo-600 mb-12">
+            My Work
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <a href="#" className="work__img" key={i}>
-                <img src={`img/work${i}.jpg`} alt={`work${i}`} />
-              </a>
+              <div
+                key={i}
+                className="relative overflow-hidden rounded-lg shadow-lg group cursor-pointer"
+              >
+                <img
+                  src={`img/work${i}.jpg`}
+                  alt={`work${i}`}
+                  className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                  <p className="text-white text-lg font-semibold">
+                    Project {i}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CONTACT */}
-        <section className="contact section" id="contact">
-          <h2 className="section-title">Contact</h2>
-          <div className="contact__container bd-grid">
-            <form className="contact__form">
+      {/* CONTACT */}
+      <section className="contact section py-20" id="contact">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-indigo-600 mb-12">
+            Contact Me
+          </h2>
+          <form className="bg-white shadow-md rounded-lg p-8 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
               <input
                 type="text"
-                placeholder="Name"
-                className="contact__input"
+                placeholder="Your Name"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <input
                 type="email"
-                placeholder="Email"
-                className="contact__input"
+                placeholder="Your Email"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
-              <textarea
-                cols="0"
-                rows="10"
-                className="contact__input"
-              ></textarea>
-              <input
-                type="submit"
-                value="Enviar"
-                className="contact__button button"
-              />
-            </form>
-          </div>
-        </section>
-      </main>
+            </div>
+            <textarea
+              rows="6"
+              placeholder="Your Message"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            ></textarea>
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition duration-300"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <p className="footer__title">Mahdi</p>
-        <div className="footer__social flex col justify-center">
-          <a href="#" className="footer__icon hover:text-blue-600">
-            <FaFacebook />
-          </a>
-          <a href="#" className="footer__icon hover:text-blue-600">
-            <FaInstagram />
-          </a>
-          <a href="#" className="footer__icon hover:text-blue-600">
-            <FaTwitter />
-          </a>
+      <footer className="bg-gray-900 text-white py-8 mt-12">
+        <div className="text-center">
+          <h2 className="text-xl font-bold">Mahdi</h2>
+          <div className="flex justify-center space-x-4 text-lg mt-4">
+            <a href="#" className="hover:text-blue-500">
+              <FaFacebook />
+            </a>
+            <a href="#" className="hover:text-pink-500">
+              <FaInstagram />
+            </a>
+            <a href="#" className="hover:text-sky-400">
+              <FaTwitter />
+            </a>
+          </div>
+          <p className="text-sm mt-4 text-gray-400">
+            &copy; {new Date().getFullYear()} MEZIANE Ahlem. All rights
+            reserved.
+          </p>
         </div>
-        <p className="footer__copy">&#169; Bedimcode. All rights reserved</p>
       </footer>
 
       {/* SCRIPTS */}
