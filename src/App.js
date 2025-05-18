@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css/styles.css";
 import {
   FaLinkedin,
@@ -11,33 +11,60 @@ import {
 import { motion } from "framer-motion";
 
 const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  // استرجاع الوضع من localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode") === "true";
+    setDarkMode(savedMode);
+  }, []);
+
+  // تفعيل/إزالة كلاس dark على html
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
   return (
     <>
       {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-white shadow">
+      <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow">
         <nav className="max-w-7xl mx-auto flex justify-between items-center p-4">
-          <a href="#" className="text-2xl font-bold text-indigo-600">
+          <a
+            href="#"
+            className="text-2xl font-bold text-indigo-600 dark:text-indigo-400"
+          >
             your logo
           </a>
-          <ul className="hidden md:flex space-x-6 text-sm font-medium">
+          <ul className="hidden md:flex space-x-6 text-sm font-medium text-gray-700 dark:text-gray-200">
             {["Home", "About", "Skills", "Work", "Contact"].map((section) => (
               <li key={section}>
                 <a
                   href={`#${section.toLowerCase()}`}
-                  className="hover:text-indigo-600"
+                  className="hover:text-indigo-600 dark:hover:text-indigo-400"
                 >
                   {section}
                 </a>
               </li>
             ))}
           </ul>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="ml-4 px-4 py-2 border rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+          >
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
         </nav>
       </header>
 
       {/* HOME */}
       <section
         id="home"
-        className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 gap-16"
+        className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 gap-16 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
       >
         <motion.div
           className="text-center md:text-left"
@@ -46,8 +73,9 @@ const App = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Hi, I'm <span className="text-indigo-600">Mahdi</span> <br /> Web
-            Designer
+            Hi, I'm{" "}
+            <span className="text-indigo-600 dark:text-indigo-400">Mahdi</span>{" "}
+            <br /> Web Designer
           </h1>
           <a
             href="#contact"
@@ -55,7 +83,7 @@ const App = () => {
           >
             Contact Me
           </a>
-          <div className="flex justify-center md:justify-start gap-4 mt-6 text-xl text-indigo-600">
+          <div className="flex justify-center md:justify-start gap-4 mt-6 text-xl text-indigo-600 dark:text-indigo-400">
             <a href="#">
               <FaLinkedin />
             </a>
@@ -80,9 +108,12 @@ const App = () => {
           />
         </motion.div>
       </section>
-
       {/* ABOUT */}
-      <section className="about section py-20 bg-gray-50" id="about">
+      {/* ABOUT */}
+      <section
+        className="about section py-20 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+        id="about"
+      >
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <img
@@ -95,14 +126,14 @@ const App = () => {
             <h2 className="text-4xl font-bold text-indigo-600 mb-4">
               I'm Mahdi
             </h2>
-            <p className="text-gray-700 leading-relaxed text-lg">
+            <p className="text-gray-700 dark:text-gray-400 leading-relaxed text-lg">
               I'm a passionate web designer dedicated to creating modern,
               responsive, and user-friendly websites. My focus lies in combining
               aesthetic design with seamless functionality. With experience in
               front-end technologies and UX/UI design principles, I strive to
               deliver clean code and compelling digital experiences.
             </p>
-            <p className="text-gray-600 mt-4">
+            <p className="text-gray-600 dark:text-gray-400 mt-4">
               I enjoy solving problems and turning ideas into reality through
               code and creativity.
             </p>
@@ -111,7 +142,10 @@ const App = () => {
       </section>
 
       {/* SKILLS */}
-      <section className="skills section py-20 bg-white" id="skills">
+      <section
+        className="skills section py-20 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200"
+        id="skills"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-indigo-600 mb-12">
             My Skills
@@ -119,10 +153,10 @@ const App = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Skill List */}
             <div>
-              <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+              <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-500">
                 Professional Skills
               </h3>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 dark:text-gray-500 mb-8">
                 Here are some of the technologies and design tools I specialize
                 in. I’m always learning and improving!
               </p>
@@ -164,7 +198,10 @@ const App = () => {
       </section>
 
       {/* WORK */}
-      <section className="work section py-20 bg-gray-50" id="work">
+      <section
+        className="skills section py-20 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200"
+        id="skills"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-indigo-600 mb-12">
             My Work
@@ -192,7 +229,10 @@ const App = () => {
       </section>
 
       {/* CONTACT */}
-      <section className="contact section py-20" id="contact">
+      <section
+        className="contact section py-20 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        id="contact"
+      >
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-indigo-600 mb-12">
             Contact Me
@@ -226,7 +266,8 @@ const App = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
+      {/* FOOTER */}
+      <footer className="bg-gray-900 dark:bg-black text-white py-8 ">
         <div className="text-center">
           <h2 className="text-xl font-bold">Mahdi</h2>
           <div className="flex justify-center space-x-4 text-lg mt-4">
