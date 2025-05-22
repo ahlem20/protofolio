@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css/styles.css";
+import { Link } from "react-router-dom"; // Make sure this import is at the top of your file
 import {
   FaLinkedin,
   FaBehance,
@@ -58,13 +59,13 @@ const App = () => {
               className="ml-4 px-4 py-2 border rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
             >
               {darkMode ? "☀️ Light" : "🌙 Dark"}
-            </button>
-            <a
-              href="/"
-              className="px-4 py-2 border rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-            >
-              arabic
-            </a>
+            </button>                
+<Link
+  to="/"
+  className="px-4 py-2 border rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+>
+  arabic
+</Link>
           </div>
         </nav>
       </header>
